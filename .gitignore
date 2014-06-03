@@ -6,3 +6,6 @@
 
 # R data files from past sessions
 .Rdata
+
+# Stuff specific to this project
+UCI HAR Dataset
