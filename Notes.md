@@ -39,3 +39,60 @@ Beware of quotation marks embedded in data; use quote=""
 
 library(xlsx) read.xlsx() for Excel files.
 
+Reading XML
+----------------
+
+library(XML)
+doc <- xmlTreeParse(url)
+rootNode <- 
+
+xmlSApply
+
+XPath
+http://www.stat.berkeley.edu/~statcur/Workshop2/Presentations/XML.pdf
+xpathSApply
+
+HTML
+http://espn.go.com/nfl/team/_/name/bal/baltimore-ravens
+htmlTreeParse ()
+
+Numerous tutorials and links in the doobly-do
+
+Readon JSON
+----------------
+
+e.g., https://api.github.com/users/jtleek/repos
+
+library(jsonlite)
+jsonData < fromJSON(url)
+
+myjson <- toJSON(iris)
+produces a text representation of, in this case, the iris data frame.
+
+data.table
+----------------
+
+Inherits from data.frame; similar API, but much faster
+
+tables() lists tables currently in memory
+
+Subsetting columns doesn't work as with data.frame. Parameter after the comma is an *expression*: e.g., 
+DT[,list(mean(x),sum(z))]
+where x and z are columns of DT
+
+or add a new column
+DT[,w:=z^2]
+
+Warning: variables are references!
+DT2 <- DT
+DT2[, y:=2]
+this will modify DT as well.
+
+"plyr-like operations"
+DT[ , a:=x>0]
+DT[,b:= mean(x+2), by=a]
+
+setkey(DT, x)
+fast subset, sort
+merge data.tables on keys
+
