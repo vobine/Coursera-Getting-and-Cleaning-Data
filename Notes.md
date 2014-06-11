@@ -96,3 +96,26 @@ setkey(DT, x)
 fast subset, sort
 merge data.tables on keys
 
+MySQL
+--------
+
+UCSC Genomics database
+genome.ucsc.edu
+
+ucscDb <- dbConnect (MySQL(), user="genome", host="genome-mysql.cse.ucsc.edu")
+result <- dbGetQuery(ucscDb, "show databases;")
+
+Always disconnect!
+dbDisconnect(ucscDb)
+
+dbListTables ()
+hg19 database has 10949 tables. Yikes.
+dbListFields ()
+dbReadTable ()
+dbSendQuery ()
+fetch ()  n=#rows
+dbClearResult ()
+
+RMySQL vignette
+http://cran.r-project.org/web/packages/RMySQL/RMySQL.pdf
+
