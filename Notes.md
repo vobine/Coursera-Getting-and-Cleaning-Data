@@ -44,7 +44,7 @@ Reading XML
 
 library(XML)
 doc <- xmlTreeParse(url)
-rootNode <- 
+rootNode <- xmlRoot (doc)
 
 xmlSApply
 
@@ -58,7 +58,7 @@ htmlTreeParse ()
 
 Numerous tutorials and links in the doobly-do
 
-Readon JSON
+Read JSON
 ----------------
 
 e.g., https://api.github.com/users/jtleek/repos
@@ -118,4 +118,91 @@ dbClearResult ()
 
 RMySQL vignette
 http://cran.r-project.org/web/packages/RMySQL/RMySQL.pdf
+
+HDF5
+----
+
+Hierarchical Data Format
+
+    group ::= group-header group-symbol-table
+    group-header ::= group-name attribute-list
+    group-symbol-table ::= object-list
+    dataset ::= dataset-header data-array
+    dataset-header ::= datatype dataspace storage-layout
+    data-array ::= ?
+
+implementation from bioconductor.org; tutorial here:
+
+http://www.bioconductor.org/packages/release/bioc/vignettes/rhdf5/inst/rhdf5.pdf
+
+h5createFile h5createGroup h5ls
+
+h5write h5read
+
+can read/write chunks, not only complete objects
+
+Reading from the Web
+--------------------
+
+aka, Web scraping
+
+"How Netflix reverse engineered Hollywood"
+
+Beware terms of service!
+
+Example: http://scholar.google.com/citations?user=HI-I6C0AAAAJ&hl=en
+
+con <- url(string)
+content <- readLines (con)
+
+use library(XML) and htmlTreeParse with useInternalNodes=T
+
+Alternative: GET from httr
+library (httr)
+html2 <- GET(url)
+content2 <- content(html2, as='text')
+parsedHtml <- htmlParse (content2, asText=TRUE)
+xpathSApply (parsedHtml, '//title', xmlValue)
+
+Authentication: e.g., 
+GET('http://httpbin.org/basic-auth/user/passwd', authenticate('user', 'passwd'))
+
+use handle!
+google <- handle('http://google.com')
+then need not repeat authentication.
+
+Reading from APIs
+--------------------
+
+Usually need an API account, e.g., dev.twitter.com
+
+Using httr:
+oauth_app
+sig <- sign_oauth1.0
+
+then GET works, with sig as the authentication parameter.
+
+Trick: the JSON output from content() can be hard to read, so try:
+js <- jsonlite::fromJSON (toJSON(content(GET(...))))
+
+Specific URLs are documented by the various sites
+
+httr has GET, POST, PUT, DELETE
+
+Check httr demos on github
+
+Other sources
+----------------
+
+Lots and lots of R packages. Google "foo R package" for format foo.
+
+?connections
+
+The package "foreign" comes in handy for reading from other software.
+
+Read images! jpeg, readbitmap, png, EBImage
+
+GIS: rdgal, rgeos, raster
+
+Audio: tuneR, seewave
 
