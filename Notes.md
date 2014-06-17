@@ -206,3 +206,32 @@ GIS: rdgal, rgeos, raster
 
 Audio: tuneR, seewave
 
+Week 3
+====
+
+Part of cleaning data is removing stuff that's of no interest.
+
+Review of subsetting:
+----------------
+
+data frames:
+
+by row X[row,] where row can be an integer index or a vector of values
+by column X[,col] where col can be an integer index or a column name
+as though it's a list of variables, X$col
+by both X[row,col]
+logical vectors, X[X$col > 3, ]
+
+which() helps filter out NAs from a logical vector:
+X[which (X$col > 8), ]
+
+sort() has a convenient parameter na.last
+order() returns indices, is more flexible.
+
+plyr library is yowza, arrange() modifies stuff
+
+Adding columns is easy: X$var4 <- 0:4
+or cbind
+
+Adding rows: rbind
+
