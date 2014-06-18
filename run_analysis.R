@@ -20,16 +20,33 @@
 # Part 1: merge data sets -------------------------------------------------
 
 # Load one (test or train) raw dataset
-loadSet <- function (path, category)
+loadSet <- function (path, category, names)
 {
   # Parameter path is the root directory of the raw datasets.
   # Category: in this case, "test" or "train".
-  file.path (path, paste ('X_', category, '.txt', sep=''))
+  # Names: variable names for data frame
+  
+  # Load feature vectors
+  fPath <- file.path (path, paste ('X_', category, '.txt', sep=''))
+  XRaw <- read.table (fPath)
+  names (XRaw) <- names
+  
+  # Load labels
+  fPath <- file.path (path, paste ('y_', category, '.txt', sep=''))
+  yRaw <- read.table (fPath)
+  cbind (yRaw, XRaw)
 }
 
+loadAllSets <- function (root)
+{
+  # Parameter root is root directory of raw datasets.
+  varNames <- read.table (file.path (root, 'features.txt'))
+  train <- loadSet (file.path (root, 'train'), 'train', varNames$V2)
+  test <- loadSet (file.path (root, 'test'), 'test', varNames$V2)
+  rbind (train, test)
+}
 
-
-# Part 2: compute mean and SD ---------------------------------------------
+# Part 2: Select values representing mean and SD ---------------------------------------------
 
 
 # Part 3: Use descriptive activity names ----------------------------------
