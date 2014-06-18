@@ -13,11 +13,14 @@
 
 # Part 1: merge data sets -------------------------------------------------
 
-
-loadSet <- function (path)
+# Load one (test or train) raw dataset
+loadSet <- function (path, category)
 {
-  
+  # Parameter path is the root directory of the raw datasets.
+  # Category: in this case, "test" or "train".
+  file.path (path, paste ('X_', category, '.txt', sep=''))
 }
+
 
 
 # Part 2: compute mean and SD ---------------------------------------------
