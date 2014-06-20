@@ -36,6 +36,7 @@ loadSet <- function (path, category, names)
   cbind (yRaw, XRaw)
 }
 
+# Load both datasets (test and train) and combine them into a single data frame
 loadAllSets <- function (root)
 {
   # Parameter root is root directory of raw datasets.
