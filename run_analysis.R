@@ -48,6 +48,11 @@ loadAllSets <- function (root)
 
 # Part 2: Select values representing mean and SD ---------------------------------------------
 
+# Select only those columns in a dataset whose names match a regular expression
+selectMatchingVariables <- function (frame, regex)
+{
+  frame [, grep (regex, names (frame))]
+}
 
 # Part 3: Use descriptive activity names ----------------------------------
 
