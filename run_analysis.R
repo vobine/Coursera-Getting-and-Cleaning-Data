@@ -28,8 +28,7 @@ loadSet <- function (path, category, names)
   
   # Load feature vectors
   fPath <- file.path (path, paste ('X_', category, '.txt', sep=''))
-  XRaw <- read.table (fPath)
-  names (XRaw) <- names
+  XRaw <- read.table (fPath, col.names=names)
   
   # Load labels
   fPath <- file.path (path, paste ('y_', category, '.txt', sep=''))
