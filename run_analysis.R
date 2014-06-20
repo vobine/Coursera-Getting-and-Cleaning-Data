@@ -28,7 +28,7 @@ loadSet <- function (path, category, names)
   
   # Load feature vectors
   fPath <- file.path (path, paste ('X_', category, '.txt', sep=''))
-  XRaw <- read.table (fPath, col.names=names)
+  XRaw <- read.table (fPath, col.names=names) #Part4: use descriptive variable names
   
   # Load labels
   fPath <- file.path (path, paste ('y_', category, '.txt', sep=''))
@@ -66,6 +66,8 @@ replaceActivityNames <- function (frame, root)
 
 # Part 4: Label data with descriptive variable names ----------------------
 
+# This was completed in part 1: see the comment there "Part4", where the
+# col.names parameter to read.table assigns descriptive names to variables.
 
 # Part 5: create tidy data set --------------------------------------------
 
