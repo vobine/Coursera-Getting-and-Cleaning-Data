@@ -56,6 +56,13 @@ selectMatchingVariables <- function (frame, regex)
 
 # Part 3: Use descriptive activity names ----------------------------------
 
+# Pull descriptive names from a file and store them in data frame
+replaceActivityNames <- function (frame, root)
+{
+  aNames <- read.table (file.path (root, 'activity_labels.txt'))
+  frame$Labels <- aNames$V2[frame$Labels]
+  frame
+}
 
 # Part 4: Label data with descriptive variable names ----------------------
 
