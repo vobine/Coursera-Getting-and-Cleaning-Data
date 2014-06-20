@@ -32,8 +32,8 @@ loadSet <- function (path, category, names)
   
   # Load labels
   fPath <- file.path (path, paste ('y_', category, '.txt', sep=''))
-  yRaw <- read.table (fPath)
-  cbind (yRaw, XRaw)
+  XRaw$Labels <- read.table (fPath)$V1
+  XRaw
 }
 
 # Load both datasets (test and train) and combine them into a single data frame
