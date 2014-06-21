@@ -33,6 +33,12 @@ loadSet <- function (path, category, names)
   # Load labels
   fPath <- file.path (path, paste ('y_', category, '.txt', sep=''))
   XRaw$Labels <- read.table (fPath)$V1
+  
+  # Load subject IDs
+  fPath <- file.path (path, paste ('subject_', category, '.txt', sep=''))
+  XRaw$Subjects <- read.table (fPath)$V1
+  
+  # Return result
   XRaw
 }
 
