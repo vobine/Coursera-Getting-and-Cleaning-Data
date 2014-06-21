@@ -42,16 +42,6 @@ loadSet <- function (path, category, names)
   XRaw
 }
 
-# Load both datasets (test and train) and combine them into a single data frame
-loadAllSets <- function (root)
-{
-  # Parameter root is root directory of raw datasets.
-  varNames <- read.table (file.path (root, 'features.txt'))
-  train <- loadSet (file.path (root, 'train'), 'train', varNames$V2)
-  test <- loadSet (file.path (root, 'test'), 'test', varNames$V2)
-  rbind (train, test)
-}
-
 # Part 2: Select values representing mean and SD ---------------------------------------------
 
 # Select only those columns in a dataset whose names match a regular expression
@@ -91,3 +81,24 @@ averageFeatureVectors <- function (df, by, drop)
 
 # The tidy data set comprises two data frames: one for feature vector means by
 # Subject, one for means by Label.
+
+# Part 1: Load both datasets (test and train) and combine them into a single data frame
+run_analysis <- function (root = 'UCI HAR Dataset')
+{
+  varNames <- read.table (file.path (root, 'features.txt'))
+  train <- loadSet (file.path (root, 'train'), 'train', varNames$V2)
+  test <- loadSet (file.path (root, 'test'), 'test', varNames$V2)
+  merged <- rbind (train, test)
+  
+  # Part 2: Select mean and SD variables
+  selected <- selectMatchingVariables (merged)
+  
+  # Part 3: Replace activity indices with descriptive names
+  described <- replaceActivityNames (selected, root)
+  
+  # Part 4: already done in step 1! :-D
+  
+  # Part 5: Create tidy data sets averaged by Subjects and by Labels
+  bySubjects <- averageFeatureVectors (described, 'Subjects', 'Labels')
+  byLabels <- averageFeatureVectors (described, 'Labels', 'Subjects')
+}
