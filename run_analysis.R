@@ -55,7 +55,7 @@ loadAllSets <- function (root)
 # Part 2: Select values representing mean and SD ---------------------------------------------
 
 # Select only those columns in a dataset whose names match a regular expression
-selectMatchingVariables <- function (frame, regex)
+selectMatchingVariables <- function (frame, regex='mean|std|^Subjects$|^Labels$')
 {
   frame [, grep (regex, names (frame))]
 }
