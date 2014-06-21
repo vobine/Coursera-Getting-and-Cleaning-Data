@@ -98,7 +98,12 @@ run_analysis <- function (root = 'UCI HAR Dataset')
   
   # Part 4: already done in step 1! :-D
   
-  # Part 5: Create tidy data sets averaged by Subjects and by Labels
+  # Part 1--4 completion: store the tidy dataset
+  write.table (described, 'Tidy.txt')
+  
+  # Part 5: Create and save tidy data sets averaged by Subjects and by Labels
   bySubjects <- averageFeatureVectors (described, 'Subjects', 'Labels')
+  write.table (bySubjects, 'TidyBySubjects.txt')
   byLabels <- averageFeatureVectors (described, 'Labels', 'Subjects')
+  write.table (byLabels, 'TidyByLabels.txt')
 }
