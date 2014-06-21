@@ -261,3 +261,37 @@ colSums()
 xtabs() makes crosstabs.
 ftable() makes multi-dimensional tables more compact and, possibly, readable.
 
+Creating new variables
+----------------
+
+Use seq() to create sequences, with by=, length=, along=
+
+Use a variable to encode some computation on the other variables, e.g., to define a subset of the full dataset:
+restData$nearMe <- restData$neighborhood %in% c('Loring Park', 'Downtown West')
+
+or restData$zipWrong <- ifelse(restData$zipCode < 0, TRUE, FALSE)
+
+or categorical from quantitative
+restData$zipGroups <- cut (restData$zipCode, breaks=quantile(restData$zipCode))
+(silly with ZIP codes, but useful elsewhere
+
+or
+library (Hmisc)
+restData$zipGroups <- cut2 (restData$zipCode, g=4)
+to divide into four groups
+
+or create factor variables
+rest$Data$zcf <- factor (restData$zipCode)
+
+or re-level factor variables:
+yesno <- sample (c('yes', 'no'), size=10, replace=TRUE)
+yesnofac = factor (yesno, levels=c('yes', 'no'))
+relevel (yesnofac, ref='yes')
+
+Cutting produces factor variables.
+
+mutate() from Plyr simultaneously derives a new variable from existing variables and adds it to the dataset.
+mutate (df, newVar=vaules)
+
+Transforms! abs, sqrt, ceiling, floor, round, signif, cos, sin, log, log2, log10, exp, ....
+
