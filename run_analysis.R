@@ -77,4 +77,13 @@ replaceActivityNames <- function (frame, root)
 
 # Part 5: create tidy data set --------------------------------------------
 
+averageFeatureVectors <- function (df, by)
+{
+  ddply (df, c(by), colwise (mean))
+}
 
+
+# Pull everything together and write the result.
+
+# The tidy data set comprises two data frames: one for feature vector means by
+# Subject, one for means by Label.
