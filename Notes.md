@@ -235,3 +235,29 @@ or cbind
 
 Adding rows: rbind
 
+Summarizing
+----------------
+
+head() and tail() show the first/last few rows.
+
+summary () gives information about each variable. It's smart about factors vs. numeric vs. strings, etc.
+
+str() is similar but different
+
+quantile()
+
+table(..., useNA=ifany) looks at specific variables?
+
+sum(is.na(...)) Look for NA
+
+any(), all()
+
+colSums()
+
+%in% looks for rows that match: e.g.,
+    > 1:8 %in% c(2, 5, 7)
+    [1] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE
+
+xtabs() makes crosstabs.
+ftable() makes multi-dimensional tables more compact and, possibly, readable.
+
