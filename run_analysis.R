@@ -75,15 +75,19 @@ replaceActivityNames <- function (frame, root)
 # This was completed in part 1: see the comment there "Part4", where the
 # col.names parameter to read.table assigns descriptive names to variables.
 
-# Part 5: create tidy data set --------------------------------------------
+# Part 5: create new tidy data sets ---------------------------------------
 
-averageFeatureVectors <- function (df, by)
+# Average values of all (other) columns grouped by a specified variable. Delete
+# a subset of columns from the result.
+averageFeatureVectors <- function (df, by, drop)
 {
-  ddply (df, c(by), colwise (mean))
+  afv <- ddply (df, c(by), colwise (mean))
+  afv[, ! names (afv) %in% drop ]
 }
 
 
-# Pull everything together and write the result.
+# Part 6: Pull the parts together -----------------------------------------
+
 
 # The tidy data set comprises two data frames: one for feature vector means by
 # Subject, one for means by Label.
