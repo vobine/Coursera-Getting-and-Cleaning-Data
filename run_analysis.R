@@ -71,8 +71,9 @@ replaceActivityNames <- function (frame, root)
 # a subset of columns from the result.
 averageFeatureVectors <- function (df, by, drop)
 {
-  afv <- ddply (df, c(by), colwise (mean))
-  afv[, ! names (afv) %in% drop ]
+  ddply (df[, ! names (df) %in% drop ], 
+         c(by), 
+         colwise (mean))
 }
 
 
