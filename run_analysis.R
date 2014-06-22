@@ -88,6 +88,8 @@ selectMatchingVariables <- function (frame, regex='mean|std|^Subjects$|^Labels$'
 
 # Part 3: Use descriptive activity names ----------------------------------
 
+library (plyr)
+
 # Pull descriptive names from a file and store them in data frame
 replaceActivityNames <- function (frame, root)
 {
