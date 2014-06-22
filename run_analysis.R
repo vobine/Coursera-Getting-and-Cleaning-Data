@@ -48,10 +48,8 @@ run_analysis <- function (root = 'UCI HAR Dataset')
   write.table (described, 'Tidy.txt')
   
   # Part 5: Create and save tidy data sets averaged by Subjects and by Labels
-  bySubjects <- averageFeatureVectors (described, 'Subjects', 'Labels')
-  write.table (bySubjects, 'TidyBySubjects.txt')
-  byLabels <- averageFeatureVectors (described, 'Labels', 'Subjects')
-  write.table (byLabels, 'TidyByLabels.txt')
+  bySubjects <- averageFeatureVectors (described, c ('Subjects', 'Labels'))
+  write.table (bySubjects, 'TidyMeans.txt')
 }
 
 
@@ -105,11 +103,8 @@ replaceActivityNames <- function (frame, root)
 
 # Part 5: create new tidy data sets ---------------------------------------
 
-# Average values of all (other) columns grouped by a specified variable. Delete
-# a subset of columns from the result.
-averageFeatureVectors <- function (df, by, drop)
+# Average values of all (other) columns grouped by a specified variable.
+averageFeatureVectors <- function (df, by)
 {
-  ddply (df[, ! names (df) %in% drop ], 
-         c(by), 
-         colwise (mean))
+  ddply (df, c(by), colwise (mean))
 }
