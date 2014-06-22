@@ -14,9 +14,21 @@ Course project
 
 * *TidyMeans.txt* is output from R `write.table` containing a data frame representing the tidy dataset specified by part 5 of the project instructions. It comprises mean values for each of the 79 dimensions in the pruned feature vector, grouped by all 180 combinations of Subject, of whom there are 30, and Label, of which there are 6.
 
-* *run_analysis.R* is an R script to read data as distributed from UCI and produce the output datasets *Tidy.txt* and *TidyMeans.txt*. To run the analysis, simply download the UCI HAR dataset and run the script:
+* *run_analysis.R* is an R script to read data as distributed from UCI and produce the output datasets *Tidy.txt* and *TidyMeans.txt*.
+
+## How it works
+
+To run the analysis:
+
+1. Download the UCI HAR dataset ZIP file.
+1. Unpack the ZIP file, to create and populate a directory named "UCI HAR Dataset".
+1. Start R or RStudio.
+1. Change to the directory in which you unpacked the ZIP file, i.e., the one that now contains "UCI HAR Dataset" as a subdirectory.
+1. run the script:
+
 ```R
 source ('run_analysis.R')
 run_analysis ()
 ```
+
 The result will be tidy datasets named "Tidy.txt" and "TidyMeans.txt" in the working directory.
