@@ -10,11 +10,49 @@
 #  5. Creates a second, independent tidy data set with the average of each
 #     variable for each activity and each subject.
 
-# Data:
+# Approach, and a table of contents for the source below:
+
+# In part 0, the function run_analysis performs all five steps of the project,
+#  (almost) in order. To accomplish this, it calls functions defined lower in the
+#  file, in subsequent parts.
+# Parts 1--5 are auxiliary functions for each step of the project.
+
+# Data citation:
 # Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L.
 # Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass
 # Hardware-Friendly Support Vector Machine. International Workshop of Ambient
 # Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+# Part 0: Pull the parts together -----------------------------------------
+
+# The tidy data set comprises two data frames: one for feature vector means by
+# Subject, one for means by Label.
+
+run_analysis <- function (root = 'UCI HAR Dataset')
+{
+  # Part 1: Load both datasets (test and train) and combine them into a single data frame
+  varNames <- read.table (file.path (root, 'features.txt'))
+  train <- loadSet (file.path (root, 'train'), 'train', varNames$V2)
+  test <- loadSet (file.path (root, 'test'), 'test', varNames$V2)
+  merged <- rbind (train, test)
+  
+  # Part 2: Select mean and SD variables
+  selected <- selectMatchingVariables (merged)
+  
+  # Part 3: Replace activity indices with descriptive names
+  described <- replaceActivityNames (selected, root)
+  
+  # Part 4: already done in step 1! :-D
+  
+  # Part 1--4 completion: store the tidy dataset
+  write.table (described, 'Tidy.txt')
+  
+  # Part 5: Create and save tidy data sets averaged by Subjects and by Labels
+  bySubjects <- averageFeatureVectors (described, 'Subjects', 'Labels')
+  write.table (bySubjects, 'TidyBySubjects.txt')
+  byLabels <- averageFeatureVectors (described, 'Labels', 'Subjects')
+  write.table (byLabels, 'TidyByLabels.txt')
+}
 
 
 # Part 1: merge data sets -------------------------------------------------
@@ -74,37 +112,4 @@ averageFeatureVectors <- function (df, by, drop)
   ddply (df[, ! names (df) %in% drop ], 
          c(by), 
          colwise (mean))
-}
-
-
-# Part 6: Pull the parts together -----------------------------------------
-
-
-# The tidy data set comprises two data frames: one for feature vector means by
-# Subject, one for means by Label.
-
-# Part 1: Load both datasets (test and train) and combine them into a single data frame
-run_analysis <- function (root = 'UCI HAR Dataset')
-{
-  varNames <- read.table (file.path (root, 'features.txt'))
-  train <- loadSet (file.path (root, 'train'), 'train', varNames$V2)
-  test <- loadSet (file.path (root, 'test'), 'test', varNames$V2)
-  merged <- rbind (train, test)
-  
-  # Part 2: Select mean and SD variables
-  selected <- selectMatchingVariables (merged)
-  
-  # Part 3: Replace activity indices with descriptive names
-  described <- replaceActivityNames (selected, root)
-  
-  # Part 4: already done in step 1! :-D
-  
-  # Part 1--4 completion: store the tidy dataset
-  write.table (described, 'Tidy.txt')
-  
-  # Part 5: Create and save tidy data sets averaged by Subjects and by Labels
-  bySubjects <- averageFeatureVectors (described, 'Subjects', 'Labels')
-  write.table (bySubjects, 'TidyBySubjects.txt')
-  byLabels <- averageFeatureVectors (described, 'Labels', 'Subjects')
-  write.table (byLabels, 'TidyByLabels.txt')
 }
