@@ -295,3 +295,44 @@ mutate (df, newVar=vaules)
 
 Transforms! abs, sqrt, ceiling, floor, round, signif, cos, sin, log, log2, log10, exp, ....
 
+
+Reshaping data
+----------------
+
+library (reshape2)
+head (mtcars)
+
+melt() differentiates id variables from measure variables. The result of melting a data frame will be a tall, skinny frame with exactly one measure value per row. The other columns will be one for each id variable, plus a "variable" column to identify which measure appears in this row.
+
+dcast() takes a melted data frame and reshapes it under control of an expression using the ~ (models) operator; so, if one has melted the mtcars data frame with id=c('carname', 'gear', 'cyl'), then
+dcast (carMelt, cyl ~ variable, mean)
+yields a 3-row DF, one for each of 4, 6, 8 cylinders, with means for mpg and hp.
+
+tapply (InsectSprays$count, InsectSprays$spray, sum)
+
+split/apply/combine
+spIns <- split (InsectSprays$count, InsectSprays$spray)
+sprCount <- lapply (spIns, sum)
+unlist (sprCount)
+
+Plyr does this in one step:
+ddply (InsectSprays, .(spray), summarize, sum=sum(count))
+
+plyr tutorial http://plyr.had.co.nz/09-user/
+http://www.r-bloggers.com/a-quick-primer-on-split-apply-combine-problems
+
+
+Merging data
+----------------
+
+Matching based on IDs
+
+Peer review data:
+https://dl.dropboxusercontent.com/u7710864/data/reviews-apr29.csv
+https://dl.dropboxusercontent.com/u7710864/data/solutions-apr29.csv
+
+merge() merges data frames based on selected column values.
+Default is to merge on all common column names.
+
+plyr::join() faster but simpler than merge()
+
