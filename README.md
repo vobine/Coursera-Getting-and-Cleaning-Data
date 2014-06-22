@@ -16,6 +16,37 @@ Course project
 
 * *run_analysis.R* is an R script to read data as distributed from UCI and produce the output datasets *Tidy.txt* and *TidyMeans.txt*.
 
+
+## Code book
+
+Each variable in the feature vector is dimensionless, with values normalized to the interval [-1, 1].
+
+Each variable name in the feature vector is composed of three parts:
+* the *root name* to describe the source of the data, as enumerated below;
+* the *summary*, which describes the summarization process to produce the variable, either "mean" for mean or "std" for standard deviation; and
+* the *axis*, either "X", "Y", or "Z".
+
+Variable root names:
+
+  * *fBodyAcc*: FFT of accelerometer body component with gravitational acceleration filtered out.
+  * *fBodyAccJerk*: FFT of first derivative of accelerometer body component with gravitational acceleration filtered out.
+  * *fBodyAccMag*: FFT of magnitude of accelerometer body component with gravitational acceleration filtered out.
+  * *fBodyBodyAccJerkMag*: FFT of first derivative of magnitude of accelerometer body component with gravitational acceleration filtered out.
+  * *fBodyBodyGyroJerkMag*: FFT of first derivative of magnitude of gyroscope body component with gravitational acceleration filtered out.
+  * *fBodyBodyGyroMag*: FFT of magnitude of gyroscope body component with gravitational acceleration filtered out.
+  * *fBodyGyro*: FFT of gyroscope body component with gravitational acceleration filtered out.
+  * *tBodyAcc*: accelerometer body component with gravitational acceleration filtered out.
+  * *tBodyAccJerk*: second derivative of accelerometer body component with gravitational acceleration filtered out.
+  * *tBodyAccJerkMag*: first derivative of magnitude of accelerometer body component with gravitational acceleration filtered out.
+  * *tBodyAccMag*: magnitude of accelerometer body component with gravitational acceleration filtered out.
+  * *tBodyGyro*: gyroscope body component with gravitational acceleration filtered out.
+  * *tBodyGyroJerk*: first derivative of gyroscope body component with gravitational acceleration filtered out.
+  * *tBodyGyroJerkMag*: magnitude of first derivative of gyroscope body component with gravitational acceleration filtered out.
+  * *tBodyGyroMag*: magnitude of gyroscope body component with gravitational acceleration filtered out.
+  * *tGravityAcc*: gravity coponent of accelerometer.
+  * *tGravityAccMag*: magnitude of gravity component of accelerometer.
+
+
 ## How it works
 
 To run the analysis:
