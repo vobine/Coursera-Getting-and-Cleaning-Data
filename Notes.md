@@ -336,3 +336,71 @@ Default is to merge on all common column names.
 
 plyr::join() faster but simpler than merge()
 
+
+Week 4
+================
+
+Editing text variables
+----------------
+
+tolower(), toupper()
+
+strsplit()
+
+firstElement <- function(x) {x[1]}
+sapply (splitNames, firstElement)
+
+sub(), gsub()
+
+grep(), grepl()
+
+library (stringr)
+nchar() counts characters
+substr() takes substrings
+paste(..., sep=), paste0()
+str_trim()
+
+Character variables should usually be factors
+
+Regular expressions
+----------------
+
+metacharacters:
+caret, dollar, brackets, asterisk, period, vertical bar, parentheses, question mark, backslash (metacharacter escape), plus, braces (minimum and maximum number of matches)
+
+Parentheses also remember matching strings, which can be referenced later by index
+
+Asterisk matches leftmost-maximal substring
+
+Dates
+----
+
+date() gets now as a character string
+
+Sys.Date() gets a Date-class variable
+
+format() takes a more-or-less as usual format string for dates, e.g., %d
+
+as.Date() is kinda strptime
+
+weekdays(), months(), julian()
+
+library (lubridate) has ymd(), mdy(), dmy(), ymd_hms(), etc. to smooth things, with tz= parameter
+wday() like weekday()
+
+Data resources
+----------------
+
+URLs for all the data (UN, US, etc.)
+
+gapminder.org/ for 
+
+asdfree.com/ for US survey data
+
+infochimps.com/marketplace
+
+kaggle.com/
+
+... and more, and more, and more ...
+
+APIs with R interfaces: twitteR, rfigshare, rplos, rOpenSci, RFacebook, RGoogleMaps
